@@ -31,7 +31,19 @@ public class WordCount {
 	public static Map<String, Integer> countWords(List<String> words) {
 
 		// FIXME
-		throw new NotYetImplementedException();
+		
+		HashMap<String, Integer> wordCount = new HashMap<>();
+		for(String word: words) {
+			if(wordCount.get(word) == null) { //if the word we're looking up and the map says null, then we've never seen this word before
+				wordCount.put(word, 1);
+			}
+			else { //already in the map
+				int count = wordCount.get(word); //occurrences of the word we're looking at
+				wordCount.put(word, count + 1); //can't have the same key more than once. putting something into the map, and if the key already exists, it can override the value of what was in the map before
+			}//else: whatever value was the original one (count) we're replacing it with one bigger (count + 1) because we've now seen the word one additional time
+		}
+		return wordCount;
+		//throw new NotYetImplementedException();
 
 	}
 	
@@ -45,8 +57,14 @@ public class WordCount {
 		wordList.add("to");
 		wordList.add("be");
 		Map<String, Integer> words = countWords(wordList);
+		System.out.println(words);
 		
 		//TODO: Write code that will iterate over the words map
 		//to verify its contents
+		//you will always use a for each loop to iterate through maps
+		for(String key: words.keySet()) {
+			System.out.println(key + ": " + words.get(key));
+		}
+		
 	}
 }

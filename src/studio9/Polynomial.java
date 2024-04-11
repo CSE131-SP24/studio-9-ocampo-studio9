@@ -4,13 +4,16 @@ import java.util.LinkedList;
 
 public class Polynomial {
 	
-	private LinkedList<Double> list;
+	private LinkedList<Double> list; //or coefficients
 
 	/**
 	 * Constructs a Polynomial with no terms yet.
 	 */
 	public Polynomial() {
 		//FIXME
+		
+		this.list = new LinkedList<>();
+		
 	}
 
 	
@@ -21,6 +24,9 @@ public class Polynomial {
 	 */
 	public void addTerm(double coeff) {
 		//FIXME
+		
+		list.add(coeff);  ///1st one to get added has the largest exponent
+		
 	}
 	
 	/*
@@ -29,7 +35,20 @@ public class Polynomial {
 	 * Cx^N + Cx^N-1 + ... + Cx + C
 	 */
 	public String toString() {
-		return ""; //FIXME
+		
+		String result = "";
+		int exp = list.size() - 1; //10 items in list will make x^9 the highest exponent
+		for(double d : list) {
+			if(exp > 0) {
+				result = result + d + "x^" + exp + " + ";
+			}
+			else {
+				result = result + d;
+			}
+			exp--;
+		}
+		
+		return result; //FIXME
 	}
 	
 	/**
@@ -38,12 +57,31 @@ public class Polynomial {
 	 * @return value of polynomial at that x
 	 */
 	public double evaluate(double x) {
-		return 0;//FIXME
+		
+		double result = 0;
+		int exp = list.size() - 1;
+		
+		for(double d : list) {
+			result = result + d * Math.pow(x, exp);
+			exp--;
+		}
+		
+		return result;//FIXME
 	}
 
 	
 	public Polynomial derivative() {
-		return null;//FIXME
+		
+		Polynomial deriv = new Polynomial();
+		int exp = list.size() - 1;
+		for(double d : list) { //visit each coefficient
+			if(exp > 0) {
+				deriv.addTerm(exp * d);
+			}
+			exp--;
+		}
+		
+		return deriv;//FIXME
 	}
 	
 
