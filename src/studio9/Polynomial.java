@@ -47,8 +47,21 @@ public class Polynomial {
 			}
 			exp--;
 		}
+		return result;
+		/*OR CAN BE:
+		String result = "";
+		int exp = list.size()-1;
+		for(int i = 0; i<list.size()-1;i++) {
+			if(exp > 0) {
+				result = result + list.get(i) + "x^" + exp + " + ";
+			}
+			else {
+				result = result + list.get(i);
+			}
+			exp--;
+		}
 		
-		return result; //FIXME
+		return result;*/ //FIXME
 	}
 	
 	/**
